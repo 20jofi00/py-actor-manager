@@ -26,15 +26,9 @@ class ActorManager:
     def update(self, pk: int, new_first_name: str, new_last_name: str) -> None:
         self._db.execute(
             f"UPDATE {self.table_name} "
-            f"SET first_name = ? "
+            f"SET first_name = ?, last_name = ? "
             f"WHERE id = ?",
-            (new_first_name, pk)
-        )
-        self._db.execute(
-            f"UPDATE {self.table_name} "
-            f"SET last_name = ? "
-            f"WHERE id = ?",
-            (new_last_name, pk)
+            (new_first_name, new_last_name, pk),
         )
         self._db.commit()
 
